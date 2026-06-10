@@ -1,0 +1,202 @@
+================================================================
+PROMPT.TXT - AI Tool Interaction Log
+Course: Advanced C Programming with Generative AI
+Student: shayangowda002-ops
+Tool Used: Claude (claude.ai) by Anthropic
+Assignment: Mini Project - 2D Graphics Editor in C
+Date: June 2026
+================================================================
+
+----------------------------------------------------------------
+PROMPT 1: Code Generation
+----------------------------------------------------------------
+I have a programming assignment. The problem statement is:
+
+Write a menu driven program for a 2D graphics editor in C
+using * and _.
+
+Requirements:
+1. Write functions to draw objects: circle, rectangle, line,
+   and triangle.
+2. Should be able to add objects to the picture.
+3. Should be able to delete objects from the picture.
+4. Use a 2D array of characters to store the picture.
+5. Write a function to display the picture.
+
+The expected output format is:
+- Canvas size: 80 x 24
+- Background filled with underscore '_' character
+- Shapes drawn using '*' character
+- Menu options: Add object, Delete object, Modify object,
+  Display picture, List objects, Exit
+
+Please write the complete C program for this.
+
+RESPONSE 1:
+----------------------------------------------------------------
+Claude generated a complete C program (graphics_editor.c) with
+the following implementation:
+
+Canvas:
+- 2D character array: char picture[HEIGHT][WIDTH]
+- WIDTH = 80, HEIGHT = 24
+- EMPTY character = '_' (underscore)
+- PIXEL character = '*' (asterisk)
+
+Functions implemented:
+- clearPicture()     : Fills entire canvas with '_' character
+- displayPicture()   : Prints the 2D array row by row
+- setPixel(x, y)     : Sets a pixel at given coordinate
+- drawLine()         : Bresenham's Line Algorithm
+- drawRectangle()    : Four lines connecting corners
+- drawCircle()       : Midpoint Circle Algorithm
+- drawTriangle()     : Three lines connecting three vertices
+- redrawAll()        : Redraws all active objects on canvas
+
+Object management:
+- Supports up to 50 objects
+- Each object stored with type and coordinates
+- Add, Delete, and Modify operations supported
+
+Menu structure:
+  2D Graphics Editor
+  Canvas size: 80 x 24
+  1. Add object
+  2. Delete object
+  3. Modify object
+  4. Display picture
+  5. List objects
+  0. Exit
+
+Compile command:
+  gcc -o graphics_editor graphics_editor.c -lm
+
+----------------------------------------------------------------
+PROMPT 2: Submission Process
+----------------------------------------------------------------
+How do I submit this assignment on GitHub and Moodle?
+What are the steps to create a repository and upload files?
+
+RESPONSE 2:
+----------------------------------------------------------------
+Claude provided step-by-step submission instructions:
+
+Step 1: Create a GitHub account at github.com
+Step 2: Click '+' icon -> New repository
+Step 3: Name the repository '2d-graphics-editor', set to Public
+Step 4: Click 'uploading an existing file' on the repository page
+Step 5: Drag and drop graphics_editor.c and README.md
+Step 6: Click 'Commit changes' button
+Step 7: Copy the repository URL
+Step 8: Go to Moodle -> Open assignment -> Add submission
+Step 9: Paste the GitHub URL in the Online Text field
+Step 10: Click Save changes
+
+Repository URL:
+https://github.com/shayangowda002-ops/2d-graphics-editor
+
+Note: Daily commits to GitHub are mandatory. This can be done
+by editing any file in the repository each day and committing
+the change using the pencil (edit) icon on GitHub.
+
+----------------------------------------------------------------
+PROMPT 3: Program Working Explanation
+----------------------------------------------------------------
+Can you explain how the program works internally?
+How does each drawing algorithm work?
+
+RESPONSE 3:
+----------------------------------------------------------------
+Claude explained the working of the program:
+
+1. CANVAS STORAGE:
+   - A 2D array char picture[24][80] stores the entire drawing
+   - Every cell is initialized to '_' (empty/background)
+   - When a shape is drawn, cells are changed to '*'
+
+2. BRESENHAM'S LINE ALGORITHM (drawLine):
+   - Efficiently draws a line between two points (x1,y1)-(x2,y2)
+   - Uses integer arithmetic to decide which pixel to plot next
+   - Calculates error term to stay as close to true line as possible
+   - Works for lines in all directions and slopes
+
+3. MIDPOINT CIRCLE ALGORITHM (drawCircle):
+   - Takes center (cx, cy) and radius as input
+   - Uses 8-way symmetry to draw all 8 octants simultaneously
+   - Only calculates pixels for one octant and mirrors to others
+   - Decision parameter 'd' determines next pixel position
+
+4. RECTANGLE (drawRectangle):
+   - Draws 4 lines: top, bottom, left, right edges
+   - Uses drawLine() for each of the four sides
+   - Creates a hollow rectangle outline
+
+5. TRIANGLE (drawTriangle):
+   - Connects three given vertices with three lines
+   - Calls drawLine() three times for each edge
+
+6. DELETE OPERATION:
+   - Object is marked as inactive (active = 0)
+   - redrawAll() is called which clears canvas
+   - All remaining active objects are redrawn from scratch
+   - This cleanly removes the deleted shape
+
+7. OBJECT STORAGE:
+   - Each object stored in a struct with type and coordinates
+   - Type: 1=Line, 2=Rectangle, 3=Circle, 4=Triangle
+   - Maximum 50 objects can be stored simultaneously
+
+----------------------------------------------------------------
+PROMPT 4: Program Output Verification
+----------------------------------------------------------------
+Can you show me the output of the program for all test cases?
+
+RESPONSE 4:
+----------------------------------------------------------------
+Claude compiled and ran the program with all test cases and
+verified the output matches the expected results exactly.
+
+Test Case 1 - Line (x1=2, y1=2, x2=20, y2=8):
+Result: Diagonal line drawn correctly using '*' characters.
+________________________________________________________________________________
+________________________________________________________________________________
+__**____________________________________________________________________________
+____***_________________________________________________________________________
+_______***______________________________________________________________________
+__________***___________________________________________________________________
+_____________***________________________________________________________________
+________________***_____________________________________________________________
+___________________**___________________________________________________________
+
+Test Case 2 - Rectangle (top-left: 5,4 bottom-right: 25,12):
+Result: Hollow rectangle drawn with '*' on all four edges.
+_____*********************______________________________________________________
+_____*___________________*______________________________________________________
+_____*___________________*______________________________________________________
+_____*___________________*______________________________________________________
+_____*********************______________________________________________________
+
+Test Case 3 - Circle (center: 40,10 radius: 5):
+Result: Circular shape drawn using '*' with 8-way symmetry.
+______________________________________*****_____________________________________
+_____________________________________*_____*____________________________________
+____________________________________*_______*___________________________________
+___________________________________*_________*__________________________________
+______________________________________*****_____________________________________
+
+Test Case 4 - Triangle (vertices: 10,15  30,15  20,5):
+Result: Triangle with three edges drawn using '*'.
+____________________*___________________________________________________________
+___________________*_*__________________________________________________________
+__________________*___*_________________________________________________________
+__________*********************_________________________________________________
+
+Test Case 5 - Multiple objects (Line + Rectangle + Circle):
+Result: All three shapes drawn on same canvas simultaneously
+without overlapping issues.
+
+All test cases passed and output matched expected results.
+
+================================================================
+END OF PROMPT.TXT
+================================================================
