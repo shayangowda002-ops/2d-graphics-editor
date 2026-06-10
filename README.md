@@ -2,60 +2,103 @@
 
 A menu-driven 2D graphics editor written in C that uses a 2D character array as a canvas, drawing shapes using `*` and `_` characters.
 
-## Features
+## Problem Statement
 
-- Draw **Circle**, **Rectangle**, **Line**, and **Triangle**
-- **Add** objects to the canvas
-- **Delete** objects by ID (canvas redraws cleanly)
-- **List** all active objects with their parameters
-- **Clear** the entire canvas
-- 30×80 character canvas displayed with borders
+Write a menu driven program for a 2D graphics editor in C using `*` and `_`.
+- Draw objects: Circle, Rectangle, Line, Triangle
+- Add objects to the picture
+- Delete objects from the picture
+- Use a 2D array of characters to store the picture
+- Display the picture
 
-## Build & Run
+## How to Compile and Run
 
 ```bash
 gcc -o graphics_editor graphics_editor.c -lm
 ./graphics_editor
 ```
 
-Requires a C compiler (gcc/clang) and the standard math library.
+## Menu Options
+
+```
+2D Graphics Editor
+Canvas size: 80 x 24
+1. Add object
+2. Delete object
+3. Modify object
+4. Display picture
+5. List objects
+0. Exit
+```
+
+## Shapes Supported
+
+| Shape | Input Required |
+|---|---|
+| Line | x1 y1 x2 y2 |
+| Rectangle | top-left x y, bottom-right x y |
+| Circle | center x y, radius |
+| Triangle | x1 y1 x2 y2 x3 y3 |
 
 ## How It Works
 
 | Component | Details |
 |---|---|
-| Canvas | `char canvas[30][80]` — 2D array of characters |
-| Circle | Midpoint circle algorithm |
-| Line | Bresenham's line algorithm |
-| Rectangle | Hollow rectangle via 4 edge draws |
-| Triangle | Three lines connecting three vertices |
-| Delete | Marks object inactive → redraws all remaining objects |
+| Canvas | `char picture[24][80]` — 2D array of characters |
+| Empty cell | `_` underscore |
+| Drawn pixel | `*` asterisk |
+| Line | Bresenham's Line Algorithm |
+| Circle | Midpoint Circle Algorithm |
+| Rectangle | Four lines connecting corners |
+| Triangle | Three lines connecting vertices |
+| Delete | Marks object inactive, redraws all remaining |
 
-## Usage Example
+## Sample Output
 
+### Line
 ```
-  ╔══════════════════════════╗
-  ║   2D GRAPHICS EDITOR     ║
-  ╠══════════════════════════╣
-  ║  1. Add Object           ║
-  ║  2. Delete Object        ║
-  ║  3. Display Canvas       ║
-  ║  4. List Objects         ║
-  ║  5. Clear Canvas         ║
-  ║  0. Exit                 ║
-  ╚══════════════════════════╝
-```
-
-Choose **1** to add a shape, enter its parameters, then **3** to display the canvas.
-
-## File Structure
-
-```
-graphics_editor.c   — single-file implementation
-README.md
+________________________________________________________________________________
+________________________________________________________________________________
+__**____________________________________________________________________________
+____***_________________________________________________________________________
+_______***______________________________________________________________________
+__________***___________________________________________________________________
 ```
 
-## Assignment
+### Rectangle
+```
+_____*********************______________________________________________________
+_____*___________________*______________________________________________________
+_____*___________________*______________________________________________________
+_____*********************______________________________________________________
+```
 
-Menu-driven 2D graphics editor in C using `*` and `_` characters.  
-Course submission — Daily commits maintained as required.
+### Circle
+```
+______________________________________*****_____________________________________
+_____________________________________*_____*____________________________________
+____________________________________*_______*___________________________________
+___________________________________*_________*__________________________________
+______________________________________*****_____________________________________
+```
+
+### Triangle
+```
+____________________*___________________________________________________________
+___________________*_*__________________________________________________________
+__________________*___*_________________________________________________________
+__________*********************_________________________________________________
+```
+
+## AI Tool Used
+
+This project was developed using **Claude (claude.ai)** by Anthropic.
+All prompts and responses are documented in `prompt.txt`.
+
+## Files
+
+```
+graphics_editor.c   — Main C source code
+README.md           — Project documentation
+prompt.txt          — AI interaction log
+```
