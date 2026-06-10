@@ -215,7 +215,7 @@ int main() {
             }
 
         } else if (choice == 0) {
-            printf("Goodbye.\n");
+            printf("Not a good choice bye.\n");
             break;
         } else {
             printf("Invalid choice.\n");
